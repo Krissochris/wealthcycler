@@ -34,6 +34,18 @@
                                 </div>
                                 {!! Form::close() !!}
                             </div>
+
+                            <div class="col-sm-6">
+                                {!! Form::open(['route' => 'become_pro_member:verify_coupon_code']) !!}
+                                    <div class="form-group">
+                                        <label for="coupon_code">Coupon Code</label>
+                                        {!! Form::text('coupon_code', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Verify Coupon </button>
+                                    </div>
+                                {!! Form::close() !!}
+                            </div>
                         </div>
 
                     </div>

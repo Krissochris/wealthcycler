@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Package;
+use App\Processors\CouponCodeVerifyProcessor;
 use App\Processors\UserDepositProcessor;
+use App\Repositories\PackageRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\CoinPaymentTransaction as Transaction;
@@ -48,6 +51,42 @@ class BecomeProMemberController extends Controller
         }
 
         flash()->error('Invalid payment method selected!.');
+        return back();
+    }
+
+    public function verifyCouponCode(Request $request)
+    {
+        $request->validate([
+            'coupon_code'
+        ]);
+        $coupon_code = $request->input('coupon_code');
+
+        if (!empty($coupon_code)) {
+            $couponVerifier = new CouponCodeVerifyProcessor('https://tyenorg.com');
+            $return = $couponVerifier->verify(auth()->user()->username, $coupon_code);
+
+            if ($return === false) {
+                flash()->error('An error occurred verifying your coupon code. Please try again');
+            }
+
+            if ($return) {
+                $result_array = json_decode($return, true);
+                if ($result_array['result'] === "ok") {
+
+                    auth()->user()->makeProMember('coupon');
+                    auth()->user()->virtual_wallet->credit(15);
+                    $package = Package::where('entry_package', 1)->first();
+
+                    if ($package) {
+                        PackageRepository::subscribeUserToPackage(auth()->user()->id, $package->id);
+                    }
+                    flash()->success("Coupon was successfully verified");
+                    return redirect()->route('home');
+                } else {
+                    flash()->error($result_array['message']);
+                }
+            }
+        }
         return back();
     }
 }

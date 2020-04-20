@@ -34,6 +34,7 @@ class CouponCodeVerifyProcessor
             ]);
             return $this->response->getBody()->read($this->response->getBody()->getSize());
         } catch ( \Exception $exception) {
+            flash()->error($exception->getMessage());
             return false;
         }
     }

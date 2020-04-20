@@ -39,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/become_pro_member', 'BecomeProMemberController@index')->name('become_pro_member');
     Route::post('/become_pro_member/step_2', 'BecomeProMemberController@process_payment')->name('become_pro_member:step_2');
+    Route::post('/become_pro_member/verify_coupon_code', 'BecomeProMemberController@verifyCouponCode')->name('become_pro_member:verify_coupon_code');
+
 
     Route::get('/payment_processor/paypal', 'PayPalPaymentController@index')->name('payment_processor:paypal');
     Route::get('/payment_processor/paypal/status', 'PayPalPaymentController@getPaymentStatus')->name('payment_processor:paypal:status');
