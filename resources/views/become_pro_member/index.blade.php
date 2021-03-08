@@ -13,8 +13,16 @@
                                 To become a pro member, you would have to pay a one-time fee of $30.
                             </strong>
                         </p>
-                        <p>The $30 you are paying is for your club membership fee only. We create a virtual finance system
-                            for you and fund it with $15 from our global club savings.
+                        <p>
+                            The $30 you are paying is for TYEN CLUB lifetime Membership.
+                        </p>
+                        <p>
+                            If you are an investor only, please do not request for TYEN CLUB Membership card,
+                            and your $30 will be eligible for refund as stated in our REFUND Policy.
+                        </p>
+                        <p>
+                            We pay every member/investor of TYEN CLUB $500 annual dividends for a lifetime
+                            from SECUREWILLS INVESTMENT LTD as their yearly share return from the Company.
                         </p>
 
                         <div class="row">

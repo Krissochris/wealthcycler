@@ -21,7 +21,9 @@ class CouponCodeVerifyProcessor
     {
         $client = new Client();
         try {
-            $this->response = $client->request('POST', $this->host.'/coupon_system/verify', [
+            $url = $this->host.'/coupon_system/verify';
+
+            $this->response = $client->request('POST', $url, [
                 'json' => [
                     'username' => $username,
                     'coupon_code' => $coupon_code

@@ -34,45 +34,96 @@ Route::get('/members/index', 'MembersController@index')->name('members:index');
 Route::get('/pages/view/{page}', 'PagesController@view')->name('pages:view');
 
 
-Route::middleware(['auth', 'verified'])->group(function() {
+Route::middleware(['auth'])->group(function() {
 
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/become_pro_member', 'BecomeProMemberController@index')->name('become_pro_member');
-    Route::post('/become_pro_member/step_2', 'BecomeProMemberController@process_payment')->name('become_pro_member:step_2');
-    Route::post('/become_pro_member/verify_coupon_code', 'BecomeProMemberController@verifyCouponCode')->name('become_pro_member:verify_coupon_code');
+    Route::post('/update_email_address', 'UpdateEmailAddressController@update')->name('update_email_address');
 
+    Route::middleware(['verified'])->group(function() {
+        Route::get('/home', 'HomeController@index')->name('home');
+        Route::get('/become_pro_member', 'BecomeProMemberController@index')->name('become_pro_member');
+        Route::post('/become_pro_member/step_2', 'BecomeProMemberController@process_payment')->name('become_pro_member:step_2');
+        Route::post('/become_pro_member/verify_coupon_code', 'BecomeProMemberController@verifyCouponCode')->name('become_pro_member:verify_coupon_code');
 
-    Route::get('/payment_processor/paypal', 'PayPalPaymentController@index')->name('payment_processor:paypal');
-    Route::get('/payment_processor/paypal/status', 'PayPalPaymentController@getPaymentStatus')->name('payment_processor:paypal:status');
+        Route::get('/payment_processor/paypal', 'PayPalPaymentController@index')->name('payment_processor:paypal');
+        Route::get('/payment_processor/paypal/status', 'PayPalPaymentController@getPaymentStatus')->name('payment_processor:paypal:status');
 
-    Route::get('/payment_processor/coinpayment', 'CoinPaymentController@index')->name('payment_processor:coin_payment');
-    Route::get('/payment_processor/coinpayment/makeDeposit/{transaction}', 'CoinPaymentController@makeDeposit')->name('payment_processor:coin_payment:make_deposit');
-    Route::get('/payment_processor/coinpayment/confirmDeposit', 'CoinPaymentController@confirmDeposit')->name('payment_processor:coin_payment:confirm_deposit');
+        Route::get('/payment_processor/coinpayment', 'CoinPaymentController@index')->name('payment_processor:coin_payment');
+        Route::get('/payment_processor/coinpayment/makeDeposit/{transaction}', 'CoinPaymentController@makeDeposit')->name('payment_processor:coin_payment:make_deposit');
+        Route::get('/payment_processor/coinpayment/confirmDeposit', 'CoinPaymentController@confirmDeposit')->name('payment_processor:coin_payment:confirm_deposit');
 
+        Route::get('/payment_processor/rave_payment', 'RavePaymentController@process')->name('payment_processor:rave_payment');
+        Route::post('/payment_processor/rave_payment/status', 'RavePaymentController@getPaymentStatus')->name('payment_processor:rave_payment:status');
 
-    Route::get('/user_packages', 'UserPackagesController@index')->name('user_packages:index');
-    Route::post('/user_packages/join_package/{package_id}', 'UserPackagesController@joinPackage')->name('user_packages:join_package');
-    Route::get('/user_packages/upgrade/payment', 'UserPackagesController@payment')->name('user_packages:payment');
-    Route::post('/user_packages/upgrade/payment', 'UserPackagesController@processPayment')->name('user_packages:payment');
-
-
-    Route::get('/payment_processor/rave_payment', 'RavePaymentController@process')->name('payment_processor:rave_payment');
-    Route::post('/payment_processor/rave_payment/status', 'RavePaymentController@getPaymentStatus')->name('payment_processor:rave_payment:status');
-
-    Route::get('/payment_processor/bank_transfer', 'BankTransferController@process')->name('payment_processor:bank_transfer');
-
-
-    Route::get('/profile/edit', 'ProfileController@edit')->name('profile:edit');
-    Route::post('/profile/edit', 'ProfileController@update')->name('profile:edit');
-    Route::post('/payment_details/edit', 'PaymentDetailsController@update')->name('payment_details:edit');
+        Route::get('/payment_processor/bank_transfer', 'BankTransferController@process')->name('payment_processor:bank_transfer');
 
 
 
+        Route::middleware(['upgrade_account'])->group(function() {
+            Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/make_deposit', 'MakeDepositController@index')->name('make_deposit:index');
-    Route::post('/make_deposit/process', 'MakeDepositController@processDeposit')->name('make_deposit:process');
+            Route::get('/user_packages', 'UserPackagesController@index')->name('user_packages:index');
+            Route::post('/user_packages/join_package/{package_id}', 'UserPackagesController@joinPackage')->name('user_packages:join_package');
+            Route::get('/user_packages/upgrade/payment', 'UserPackagesController@payment')->name('user_packages:payment');
+            Route::post('/user_packages/upgrade/payment', 'UserPackagesController@processPayment')->name('user_packages:payment');
+
+            Route::get('/profile/edit', 'ProfileController@edit')->name('profile:edit');
+            Route::post('/profile/edit', 'ProfileController@update')->name('profile:edit');
+            Route::post('/payment_details/edit', 'PaymentDetailsController@update')->name('payment_details:edit');
 
 
+            Route::get('/make_deposit', 'MakeDepositController@index')->name('make_deposit:index');
+            Route::post('/make_deposit/process', 'MakeDepositController@processDeposit')->name('make_deposit:process');
+
+            /**
+             * User Notifications
+             */
+            Route::get('/user_notifications', 'UserNotificationController@index')->name('user_notifications:index');
+
+
+            /**
+             * Make a transfer
+             */
+
+            Route::get('/transfer', 'TransferController@index')->name('transfer:index');
+            Route::post('/transfer', 'TransferController@process')->name('transfer:process');
+
+
+            Route::get('/savings_wallet/{user_id}', 'SavingsWalletController@edit')->name('savings_wallet:edit');
+            Route::post('/savings_wallet/{user_id}', 'SavingsWalletController@update')->name('savings_wallet:edit');
+
+
+            Route::post('/virtual_wallet/{user_id}', 'VirtualWalletController@update')->name('virtual_wallet:edit');
+
+            /**
+             *  User Savings Wallet
+             */
+            Route::get('/user_withdrawals', 'UserWithdrawalsController@index')->name('user_withdrawals:index');
+            Route::get('/user_withdrawals/create', 'UserWithdrawalsController@create')->name('user_withdrawals:create');
+            Route::post('/user_withdrawals/create', 'UserWithdrawalsController@store')->name('user_withdrawals:store');
+
+
+            Route::get('/user_testimonies', 'UserTestimonyController@index')->name('user_testimonies:index');
+            Route::get('/user_testimonies/create', 'UserTestimonyController@create')->name('user_testimonies:create');
+            Route::post('/user_testimonies/create', 'UserTestimonyController@store')->name('user_testimonies:store');
+            Route::get('/user_testimonies/edit/{testimony}', 'TestimoniesController@edit')->name('testimonies:edit');
+            Route::post('/user_testimonies/edit/{testimony}', 'TestimoniesController@update')->name('testimonies:update');
+            Route::delete('/user_testimonies/delete/{testimony}', 'TestimoniessController@destroy')->name('testimonies:delete');
+
+
+            Route::get('/user_virtual_withdrawals', 'UserVirtualWithdrawalsController@index')->name('user_virtual_withdrawals:index');
+            Route::get('/user_virtual_withdrawals/create', 'UserVirtualWithdrawalsController@create')->name('user_virtual_withdrawals:create');
+            Route::post('/user_virtual_withdrawals/create', 'UserVirtualWithdrawalsController@store')->name('user_virtual_withdrawals:store');
+
+            // referrals
+            Route::get('/referrals', 'UserReferralsController@index')->name('user_referrals:index');
+
+        });
+    });
+});
+
+
+
+Route::middleware(['auth'/*,'role:admin'*/])->group(function() {
     /** Admin Controllers */
 
     Route::get('/site_settings', 'SettingsController@edit')->name('site_settings:edit');
@@ -132,35 +183,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/virtual_merges/edit/{virtualMerge}', 'VirtualMergesController@edit')->name('virtual_merges:edit');
     Route::put('/virtual_merges/edit/{virtualMerge}', 'VirtualMergesController@update')->name('virtual_merges:update');
     Route::delete('/virtual_merges/delete/{virtualMerge}', 'VirtualMergesController@destroy')->name('virtual_merges:delete');
-
-
-    /** Withdrawals  */
-    Route::get('/withdrawals', function() {
-        return view('withdrawals.index');
-    })->name('withdrawals:index');
-
-
-    Route::get('/user_virtual_withdrawals', 'UserVirtualWithdrawalsController@index')->name('user_virtual_withdrawals:index');
-    Route::get('/user_virtual_withdrawals/create', 'UserVirtualWithdrawalsController@create')->name('user_virtual_withdrawals:create');
-    Route::post('/user_virtual_withdrawals/create', 'UserVirtualWithdrawalsController@store')->name('user_virtual_withdrawals:store');
-
-
-    /**
-     *  User Savings Wallet
-     */
-    Route::get('/user_withdrawals', 'UserWithdrawalsController@index')->name('user_withdrawals:index');
-    Route::get('/user_withdrawals/create', 'UserWithdrawalsController@create')->name('user_withdrawals:create');
-    Route::post('/user_withdrawals/create', 'UserWithdrawalsController@store')->name('user_withdrawals:store');
-
-    /**
-     * Withdrawals
-     */
-    Route::get('/withdrawals', 'WithdrawalsController@index')->name('withdrawals:index');
-    Route::get('/withdrawals/edit/{withdrawal}', 'WithdrawalsController@edit')->name('withdrawals:edit');
-    Route::post('/withdrawals/edit/{withdrawal}', 'WithdrawalsController@update')->name('withdrawals:edit');
-    Route::get('/withdrawals/view/{withdrawal}', 'WithdrawalsController@show')->name('withdrawals:view');
-    Route::post('/withdrawals/paid/{withdrawal}', 'WithdrawalsController@paid')->name('withdrawals:paid');
-
 
     /** Countries */
     Route::get('/countries', 'CountriesController@index')->name('countries:index');
@@ -256,7 +278,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/pages/edit/{page}', 'PagesController@edit')->name('pages:edit');
     Route::post('/pages/edit/{page}', 'PagesController@update')->name('pages:edit');
 
-
     /**
      * FAQs
      */
@@ -274,39 +295,20 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
 
 
-    Route::get('/user_testimonies', 'UserTestimonyController@index')->name('user_testimonies:index');
-    Route::get('/user_testimonies/create', 'UserTestimonyController@create')->name('user_testimonies:create');
-    Route::post('/user_testimonies/create', 'UserTestimonyController@store')->name('user_testimonies:store');
-    Route::get('/user_testimonies/edit/{testimony}', 'TestimoniesController@edit')->name('testimonies:edit');
-    Route::post('/user_testimonies/edit/{testimony}', 'TestimoniesController@update')->name('testimonies:update');
-    Route::delete('/user_testimonies/delete/{testimony}', 'TestimoniessController@destroy')->name('testimonies:delete');
+    /** Withdrawals  */
+    Route::get('/withdrawals', function() {
+        return view('withdrawals.index');
+    })->name('withdrawals:index');
 
 
     /**
-     * User Notifications
+     * Withdrawals
      */
-    Route::get('/user_notifications', 'UserNotificationController@index')->name('user_notifications:index');
-
-
-
-    /**
-     * User Referrals
-     */
-    Route::get('/referrals', 'UserReferralsController@index')->name('user_referrals:index');
-
-    /**
-     * Make a transfer
-     */
-
-    Route::get('/transfer', 'TransferController@index')->name('transfer:index');
-    Route::post('/transfer', 'TransferController@process')->name('transfer:process');
-
-
-    Route::get('/savings_wallet/{user_id}', 'SavingsWalletController@edit')->name('savings_wallet:edit');
-    Route::post('/savings_wallet/{user_id}', 'SavingsWalletController@update')->name('savings_wallet:edit');
-
-
-    Route::post('/virtual_wallet/{user_id}', 'VirtualWalletController@update')->name('virtual_wallet:edit');
-
+    Route::get('/withdrawals', 'WithdrawalsController@index')->name('withdrawals:index');
+    Route::get('/withdrawals/edit/{withdrawal}', 'WithdrawalsController@edit')->name('withdrawals:edit');
+    Route::post('/withdrawals/edit/{withdrawal}', 'WithdrawalsController@update')->name('withdrawals:edit');
+    Route::get('/withdrawals/view/{withdrawal}', 'WithdrawalsController@show')->name('withdrawals:view');
+    Route::post('/withdrawals/paid/{withdrawal}', 'WithdrawalsController@paid')->name('withdrawals:paid');
 
 });
+

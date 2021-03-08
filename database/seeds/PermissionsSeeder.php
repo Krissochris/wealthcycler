@@ -12,6 +12,8 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
+        // add permissions
+        $this->createPermissions();
 
         // Confirm roles needed
         if ($this->command->confirm('Create Roles for user, default is admin and user? [y|N]', true)) {
@@ -23,7 +25,7 @@ class PermissionsSeeder extends Seeder
             $roles_array = explode(',', $input_roles);
 
             // add permissions
-            $this->createPermissions();
+            //$this->createPermissions();
 
             // add roles
             foreach($roles_array as $role) {

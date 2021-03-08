@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\StoreReferralCode;
+use App\Http\Middleware\UpgradeAccount;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,5 +63,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'upgrade_account' => UpgradeAccount::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
     ];
 }
