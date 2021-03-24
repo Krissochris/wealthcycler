@@ -177,7 +177,7 @@
                     <div class="col-md-6">
                         <div class="wt-box text-right">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/LToLyCg0zeI?rel=0" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/91-KB9pLitc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -235,11 +235,11 @@
                     </p>
                 </div>
                 <!-- TITLE END-->
-                <div class="section-content no-col-gap">
+                <div class="section-content">
                     <div class="row">
 
                         <!-- COLUMNS 1 -->
-                        <div class="col-md-4 col-sm-6 animate_line">
+                        <div class="col-md-4 col-sm-12 animate_line">
                             <div class="wt-icon-box-wraper  p-a30 center bg-white m-a5">
                                 <div class="icon-lg text-primary m-b20">
                                 </div>
@@ -247,7 +247,7 @@
                                     <h4 class="wt-tilte text-uppercase font-weight-500">Social Engagements</h4>
 
                                     <p>
-                                        We offer Sports, Pageantry, Inter-engagement Competitions and others interesting events
+                                        With our club, you are sure of developing a high profiled social life from the numerous social activities we engage ourselves in. We also host an end-of-the-year gathering where we commune and also have fun with different social activities like football, tennis, volleyball, board games, Educational activities, Talent Shows, and many others.
                                     </p>
                                 </div>
                             </div>
@@ -259,10 +259,11 @@
                                 <div class="icon-lg text-primary m-b20">
                                 </div>
                                 <div class="icon-content ">
-                                    <h4 class="wt-tilte text-uppercase font-weight-500">24/7 Support</h4>
+                                    <h4 class="wt-tilte text-uppercase font-weight-500">Free Skill acquisition </h4>
 
-                                    <p>Should you need help or have any question, our best world class support team will
-                                        always be there for you. </p>
+                                    <p>
+                                        Get Points that will grant you FREE ACCESS to unlimited professional skill training courses offered at TYEN Academy, worth above $1,000 and more. You will be required to pay for the certificates that will be issued to you by the company after training and be given FREE lifetime access to the course community.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -272,13 +273,21 @@
                                 <div class="icon-lg text-primary m-b20">
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="wt-tilte text-uppercase font-weight-500">Safe and Secure</h4>
+                                    <h4 class="wt-tilte text-uppercase font-weight-500">Earn passively with SECUREWILLS INVESTMENT LTD </h4>
 
-                                    <p>You have full access to your accounts, both withdrawals and deposits. Protection
-                                        against DDoS attacks.</p>
+                                    <p>
+                                        Securewills Investment LTD with RC No.: 1735688 is a multidimensional investment company.
+                                    </p>
+                                    <p>
+                                        At TYEN CLUB, we have given every youth (Young or old, Poor or Rich) the opportunity to acquire financial freedom through an investment plan so they wouldn't need to labor for returns with "SECUREWILLS INVESTMENT LTD". Hence, every member of TYEN CLUB will be paid $500 dividends annually by "The Young Creative Thinkers Initiative" for a lifetime. The payment is automated on an annual cycle, so you don't have to bother stressing about payouts.
+                                    </p>
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="row">
                         <!-- COLUMNS 4 -->
                         <div class="col-md-4 col-sm-6 animate_line">
                             <div class="wt-icon-box-wraper  p-a30 center bg-white m-a5">
@@ -287,13 +296,16 @@
                                 <div class="icon-content">
                                     <h4 class="wt-tilte text-uppercase font-weight-500">FREE AUTO VFS SOFTWARE</h4>
 
-                                    <p>
+<!--                                    <p>
                                         In the process of ensuring we make and fulfill our promises to our members,
                                         we launched a <strong>virtual finance system (VFS) for compounding savings</strong>.
                                         The VFS software is <strong>first of its kind</strong> and was programmed to raise a minimum of <strong>$500 dollars</strong>
                                         for every member of our club in 12months of membership. And in completion of 5years period
                                         program for each member, it should compound a <strong>minimum savings of about $500,000 to $1,000,000 dollars
                                             per member</strong>.
+                                    </p>-->
+                                    <p>
+                                        In the process of ensuring we make and fulfill our promises to our members, we launched a virtual finance system (VFS) for compounding savings. The VFS software is the first of its kind and was programmed to compound a minimum of $500 dollars for every member of our club in 12months. And in completion of 5years period program for each member, it should compound a minimum savings of about $15,000 to $25,000 dollars per member.
                                     </p>
                                 </div>
                             </div>
@@ -304,10 +316,10 @@
                                 <div class="icon-lg text-primary m-b20">
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="wt-tilte text-uppercase font-weight-500">World Coverage</h4>
+                                    <h4 class="wt-tilte text-uppercase font-weight-500">Idea funding/Business Creation</h4>
 
                                     <p>
-                                        Part of our mission is to ensure we connect countries together, and grant everyone the previlege to be part of the new revolution of true change.
+                                        Being a member of our club avails you the opportunity to have your dream idea funded by the club either with our interest-free loan or as a grant. It also grants you the opportunity to invest in co-members ideas, or buy shares in their virgin company, so while TYEN CLUB promotes and ensure the progressive growth of the new company, your shares/investment is already yielding dividends for you based on the percentage of shares you have in the company.
                                     </p>
                                 </div>
                             </div>
@@ -318,15 +330,14 @@
                                 <div class="icon-lg text-primary m-b20">
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="wt-tilte text-uppercase font-weight-500">Youth Empowerment </h4>
+                                    <h4 class="wt-tilte text-uppercase font-weight-500">Getting mutual donations</h4>
 
                                     <p>
-                                        Through funding of ideas, we created an opportunity for our club members to being creative. Ensuring that we apply diverse means in powering creativity for excellence!
+                                        Part of the mutual activities we engage in the club is helping one another in raising funds to solve peculiar problems. And supporting members with jointly raised funds when they invite us to a seasonal celebration of their life like weddings, traditional marriage, and any other substantial celebration that should undoubtedly require the presence of the club.
                                     </p>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -429,7 +440,8 @@
 
                                     <p>
                                         <strong>Login</strong> to your account after successful verification.
-                                        Then click upgrade to <strong>Pro membership</strong>. You will be prompted to pay a <strong>refundable fee of $30 for lifetime membership</strong>. Select any preferred payment options and Follow the on-screen prompts to complete your payment!
+                                        Then click upgrade to <strong>Pro membership</strong>.
+                                        You will be prompted to pay a <strong>non-refundable fee of $100 for lifetime membership</strong>. Select any preferred payment options and Follow the on-screen prompts to complete your payment!
                                     </p>
                                 </div>
                             </div>
