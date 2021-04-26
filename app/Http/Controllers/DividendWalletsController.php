@@ -29,7 +29,9 @@ class DividendWalletsController extends Controller
         $users = User::query()->where([
             ['is_pro_member', 1],
             ['pro_member_through', User::PRO_MEMBER_TYPE_1]
-        ])->pluck('name', 'id');
+        ])
+            ->has('dividend_wallet')
+            ->pluck('name', 'id');
 
 
         return view('dividend_wallets.credit_wallet')
@@ -45,12 +47,24 @@ class DividendWalletsController extends Controller
             'amount' => 'required|numeric'
         ]);
 
+        if ($request->input('amount') <= 0) {
+            flash()->error('Amount must be greater than 0');
+            return back();
+        }
+
+
         if ($request->input('users_type') === 'all_pro_members') {
             $users = User::query()->where([
                 ['is_pro_member', 1],
                 ['pro_member_through', User::PRO_MEMBER_TYPE_1]
-            ])->get();
+            ])->has('dividend_wallet')
+                ->get();
 
+
+            if ($users->count() <= 0) {
+                flash()->error('No pro members found!');
+                return back();
+            }
             // actual amount for each user
             $actual_amount = $request->input('amount') / $users->count();
 

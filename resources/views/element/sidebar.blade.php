@@ -124,6 +124,11 @@
                                             Credit Dividend Wallet
                                         </a>
                                     </li>
+                                <li class="">
+                                    <a href="{{ route('dividend_wallet_transactions:index') }}">
+                                        Dividend Wallet Transactions
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     @endcan
