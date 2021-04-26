@@ -90,6 +90,7 @@
 
                 @if (!isset($user->dividend_wallet))
                     {!! Form::open(['route' => 'dividend_wallets:store']) !!}
+                    {!! Form::hidden('user_id', $user->id) !!}
                         <div class="form-group">
                             {!! Form::submit('create dividend wallet', ['class' => 'btn btn-primary']) !!}
                         </div>
