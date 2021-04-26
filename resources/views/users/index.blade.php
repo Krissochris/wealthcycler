@@ -17,6 +17,7 @@
                         <td>Username</td>
                         <td> Saving Wallet </td>
                         <td> Virtual Wallet </td>
+                        <td> Dividend Wallet </td>
                         <td> is Pro member </td>
                         <td> Status </td>
                         <td>Created </td>
@@ -32,6 +33,20 @@
                                 <td> {{ $user->username }} </td>
                                 <td> ${{ number_format($user->saving_wallet->amount, 2) }} </td>
                                 <td> ${{ number_format($user->virtual_wallet->amount, 2) }} </td>
+
+                                <td>
+                                    @if (isset($user->dividend_wallet))
+                                        ${{ number_format($user->dividend_wallet->balance, 2) }}
+                                        <br>
+                                        <small>
+                                            @if ((int)$user->dividend_wallet->status === 1)
+                                                <i class="fa fa-check text-success"></i>
+                                            @elseif ((int)$user->dividend_wallet->status === -1)
+                                                <i class="fa fa-times text-danger"></i>
+                                            @endif
+                                        </small>
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($user->is_pro_member)
                                         <span class="text-success">Yes</span>
@@ -56,7 +71,7 @@
                                 <td> {{ $user->created_at }} </td>
                                 <td>
                                     @can('access_users_wallets')
-                                    <a class="btn btn-primary btn-sm" href="{{ route('savings_wallet:edit', $user->id) }}">wallets</a>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('user_wallets:index', $user->id) }}">wallets</a>
                                     @endcan
 
                                     @can('edit_user')

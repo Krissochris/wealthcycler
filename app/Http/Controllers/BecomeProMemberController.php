@@ -12,7 +12,7 @@ use App\CoinPaymentTransaction as Transaction;
 
 class BecomeProMemberController extends Controller
 {
-    CONST REGISTRATION_AMOUNT = 30;
+    CONST REGISTRATION_AMOUNT = 100;
 
     public function index()
     {

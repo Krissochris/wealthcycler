@@ -19,7 +19,7 @@
                                 var x = getpaidSetup({
                                     PBFPubKey: 'FLWPUBK-215f18d723c4669679a82d166839fdec-X',
                                     customer_email: "user@example.com",
-                                    amount: 30,
+                                    amount: 100,
                                     customer_phone: "234099940409",
                                     currency: "USD",
                                     txref: "rave-123456",

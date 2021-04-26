@@ -88,15 +88,6 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/transfer', 'TransferController@process')->name('transfer:process');
 
 
-            Route::get('/savings_wallet/{user_id}', 'SavingsWalletController@edit')->name('savings_wallet:edit');
-            Route::post('/savings_wallet/{user_id}', 'SavingsWalletController@update')->name('savings_wallet:edit');
-
-
-            Route::post('/virtual_wallet/{user_id}', 'VirtualWalletController@update')->name('virtual_wallet:edit');
-
-            /**
-             *  User Savings Wallet
-             */
             Route::get('/user_withdrawals', 'UserWithdrawalsController@index')->name('user_withdrawals:index');
             Route::get('/user_withdrawals/create', 'UserWithdrawalsController@create')->name('user_withdrawals:create');
             Route::post('/user_withdrawals/create', 'UserWithdrawalsController@store')->name('user_withdrawals:store');
@@ -309,6 +300,28 @@ Route::middleware(['auth'/*,'role:admin'*/])->group(function() {
     Route::post('/withdrawals/edit/{withdrawal}', 'WithdrawalsController@update')->name('withdrawals:edit');
     Route::get('/withdrawals/view/{withdrawal}', 'WithdrawalsController@show')->name('withdrawals:view');
     Route::post('/withdrawals/paid/{withdrawal}', 'WithdrawalsController@paid')->name('withdrawals:paid');
+
+
+    Route::get('/dividend-wallets/index', 'DividendWalletsController@index')
+        ->name('dividend_wallets:index');
+    Route::get('/dividend-wallets/credit', 'DividendWalletsController@showCreditWalletView')
+        ->name('dividend_wallets:show_credit_wallet');
+    Route::post('/dividend-wallets/credit', 'DividendWalletsController@creditWallet')
+        ->name('dividend_wallets:credit_wallet');
+    Route::get('/dividend-wallets/edit/{dividendWallet}', 'DividendWalletsController@edit')
+        ->name('dividend_wallets:edit');
+    Route::post('/dividend-wallets/edit/{dividendWallet}', 'DividendWalletsController@update')
+        ->name('dividend_wallets:update');
+    Route::post('/dividend-wallets/create', 'DividendWalletsController@store')
+        ->name('dividend_wallets:store');
+
+
+
+    Route::get('/savings_wallet/{user_id}', 'SavingsWalletController@edit')->name('savings_wallet:edit');
+    Route::post('/savings_wallet/{user_id}', 'SavingsWalletController@update')->name('savings_wallet:edit');
+    Route::post('/virtual_wallet/{user_id}', 'VirtualWalletController@update')->name('virtual_wallet:edit');
+
+    Route::get('/user-wallets/{user_id}', 'UserWalletsController@wallets')->name('user_wallets:index');
 
 });
 

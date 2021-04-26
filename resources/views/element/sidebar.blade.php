@@ -110,6 +110,25 @@
                 </li>
                 @endcan
 
+                    @can('virtual_platform')
+                        <li class="menu-item-has-children dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-google-wallet"></i> Dividend Wallets </a>
+                            <ul class="sub-menu children dropdown-menu">
+                                <li class="">
+                                    <a href="{{ route('dividend_wallets:index') }}">
+                                        All Wallets
+                                    </a>
+                                </li>
+                                    <li class="">
+                                        <a href="{{ route('dividend_wallets:show_credit_wallet') }}">
+                                            Credit Dividend Wallet
+                                        </a>
+                                    </li>
+                            </ul>
+                        </li>
+                    @endcan
+
+
                 @can('withdrawals')
                 <li class="">
                     <a href="{{ route('withdrawals:index') }}"> <i class="menu-icon fa fa-laptop"></i>User Withdrawals </a>

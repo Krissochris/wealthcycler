@@ -26,7 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::query()
-            ->with(['saving_wallet', 'virtual_wallet', 'debit_wallet'])
+            ->with([
+                'saving_wallet',
+                'virtual_wallet',
+                'debit_wallet'])
             ->where('id', auth()->user()->id)
             ->first();
 

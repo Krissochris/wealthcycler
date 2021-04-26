@@ -65,6 +65,27 @@
     </div>
     <!--/.col-->
 
+    @if (isset($user->dividend_wallet))
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-content dib">
+                        <div class="stat-text text-success">Dividend Wallet</div>
+                        <div class="stat-digit"> <span>&#36;</span> {{ number_format($user->dividend_wallet->balance, 2) }} </div>
+                        <div>
+                            @if((int)$user->dividend_wallet->status === \App\DividendWallet::STATUS_SUSPENDED)
+                                <small> <span class="text-danger"><i class="fa fa-warning"></i> suspended </span> <i class="fa fa-info-circle" title="Account suspended"></i> </small>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+    @endif
+
 
     <div class="col-lg-12">
         <div class="card">

@@ -10,6 +10,16 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles;
 
+    CONST PRO_MEMBER_TYPE_1 = 'payment';
+    CONST PRO_MEMBER_TYPE_2 = 'coupon';
+
+
+    CONST PRO_MEMBER_THROUGH = [
+        'payment',
+        'coupon'
+    ];
+
+
     CONST status = [
         1 => 'active',
         0 => 'unActive',
@@ -136,5 +146,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function dividend_wallet()
+    {
+        return $this->hasOne(DividendWallet::class, 'user_id', 'id');
+    }
+
+    public function credit_dividend_wallet($amount)
+    {
+        return $this->dividend_wallet->credit($amount);
     }
 }

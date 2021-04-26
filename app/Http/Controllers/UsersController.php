@@ -36,7 +36,7 @@ class UsersController extends Controller
         $this->hasPermission('index_user');
 
         $users = User::query()
-            ->with(['virtual_wallet', 'saving_wallet'])
+            ->with(['virtual_wallet', 'saving_wallet', 'dividend_wallet'])
             ->get();
 
         return view('users.index')->with(compact('users'));
@@ -192,7 +192,8 @@ class UsersController extends Controller
             'phone_number', 'city', 'state_id', 'country_id',
             'status', 'current_virtual_package_id',
             'override_virtual_withdrawal_restriction',
-            'override_referral_limit_in_virtual_transfer'
+            'override_referral_limit_in_virtual_transfer',
+            'pro_member_through'
         ]));
 
         if ((int) $request->input('is_pro_member') === 1) {

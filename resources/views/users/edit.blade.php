@@ -54,6 +54,15 @@
                 </div>
 
                 <div class="form-group">
+                    {!! Form::label('pro_member_through', 'Pro Member through') !!}
+                    {!! Form::select('pro_member_through', [
+                        '' => '',
+                        \App\User::PRO_MEMBER_TYPE_1 => 'Payment',
+                        \App\User::PRO_MEMBER_TYPE_2 => 'Coupon'
+                    ], null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
                     {!! Form::label('email_verified_at', 'Email verified') !!}
                     <input type="hidden" name="email_verified_at" value="0">
                     <label for="email_verified_at">
