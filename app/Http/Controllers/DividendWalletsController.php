@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\DividendWallet;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DividendWalletsController extends Controller
 {
@@ -26,13 +27,13 @@ class DividendWalletsController extends Controller
     {
         // fetch all proper member that paid and not through coupon code
 
-        $users = User::query()->where([
-            ['is_pro_member', 1],
-            ['pro_member_through', User::PRO_MEMBER_TYPE_1]
-        ])
-            ->has('dividend_wallet')
-            ->pluck('name', 'id');
-
+        $users = DividendWallet::query()
+            ->whereRaw('(Select cycle_balance_received from dividend_wallet_cycles
+            where dividend_wallet_cycles.dividend_wallet_id = dividend_wallets.id AND dividend_wallet_cycles.status = 1 LIMIT 1)
+             < ?',[500])
+            ->where('status', '1')
+            ->get()
+            ->pluck('user.name', 'user_id');
 
         return view('dividend_wallets.credit_wallet')
             ->with(compact('users'));
@@ -54,28 +55,31 @@ class DividendWalletsController extends Controller
 
 
         if ($request->input('users_type') === 'all_pro_members') {
-            $users = User::query()->where([
-                ['is_pro_member', 1],
-                ['pro_member_through', User::PRO_MEMBER_TYPE_1]
-            ])->has('dividend_wallet')
+
+            $dividend_wallets = DividendWallet::query()
+                ->whereRaw('(Select cycle_balance_received from dividend_wallet_cycles
+            where dividend_wallet_cycles.dividend_wallet_id = dividend_wallets.id AND dividend_wallet_cycles.status = 1 LIMIT 1)
+             < ?',[500])
+                ->where('status', 1)
                 ->get();
 
-
-            if ($users->count() <= 0) {
+            if ($dividend_wallets->count() <= 0) {
                 flash()->error('No pro members found!');
                 return back();
             }
-            // actual amount for each user
-            $actual_amount = $request->input('amount') / $users->count();
 
-            $credited_user_count = 0;
-            foreach ($users as $user) {
-                if ($user->credit_dividend_wallet($actual_amount)) {
-                    $credited_user_count += 1;
+            // actual amount for each user
+            $actual_amount = $request->input('amount') / $dividend_wallets->count();
+
+            $credited_dividend_wallet_count = 0;
+
+            foreach ($dividend_wallets as $dividend_wallet) {
+                if ($dividend_wallet->credit($actual_amount)) {
+                    $credited_dividend_wallet_count += 1;
                 }
             }
-            if ($credited_user_count > 0) {
-                flash()->success($credited_user_count.' pro members were successfully credited with $'. number_format($actual_amount, 2).' each.');
+            if ($credited_dividend_wallet_count > 0) {
+                flash()->success($credited_dividend_wallet_count .' pro members were successfully credited with $'. number_format($actual_amount, 2).' each.');
             } else {
                 flash()->error('No proper member was successfully credited. Please try again');
             }
