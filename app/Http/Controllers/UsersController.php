@@ -196,9 +196,7 @@ class UsersController extends Controller
             'pro_member_through'
         ]));
 
-        if ((int) $request->input('is_pro_member') === 1) {
-            $user->forceFill(['is_pro_member' => 1 ]);
-        } else {
+        if ((int) $request->input('is_pro_member') !== 1) {
             $user->forceFill(['is_pro_member' => 0]);
         }
 
@@ -210,6 +208,10 @@ class UsersController extends Controller
         }
 
         if ($user->update()) {
+            if ((int) $request->input('is_pro_member') === 1) {
+                $user->makeProMember($request->input('pro_member_through'));
+            }
+
             $user->syncRoles($request->input('roles'));
             $user->syncPermissions($request->input('permissions'));
 

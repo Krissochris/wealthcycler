@@ -122,10 +122,18 @@ class User extends Authenticatable implements MustVerifyEmail
             'became_pro_member_at' => now()
         ]);
         if ($this->update()) {
+            if ($this->pro_member_through === static::PRO_MEMBER_TYPE_1) {
+                if ($this->dividend_wallet === NULL) {
+                    $this->dividend_wallet()->create([
+                        'is_active' => 1
+                    ]);
+                }
+            }
             return true;
         }
         return false;
     }
+
 
     public function updateCurrentPackage($package_id)
     {
