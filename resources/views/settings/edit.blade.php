@@ -18,6 +18,11 @@
                 {!! Form::open(['route' => 'site_settings:edit']) !!}
 
                 <div class="form-group">
+                    {!! Form::label('membership_price', 'Membership Price') !!}
+                    {!! Form::number('membership_price', setting('membership_price'), ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
                     {!! Form::label('app.name', 'App Name') !!}
                     {!! Form::text('app.name', setting('app_name'), ['class' => 'form-control']) !!}
                 </div>

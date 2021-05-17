@@ -11,7 +11,7 @@
 
                 {!! Form::open(['route' => 'faqs:create']) !!}
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
 
                         <div class="form-group">
                             <label for="testimony"> Question </label>
@@ -20,7 +20,7 @@
 
                         <div class="form-group">
                             <label for="testimony"> Answer </label>
-                            {!! Form::textarea('answer', null, ['class' => 'form-control', 'placeholder' => 'Answer']) !!}
+                            {!! Form::textarea('answer', null, ['class' => 'form-control', 'placeholder' => 'Answer', 'id'=>'editor']) !!}
                         </div>
 
                         <div class="form-group">
@@ -46,3 +46,17 @@
     </div>
 
 @endsection
+
+@section('js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+@stop

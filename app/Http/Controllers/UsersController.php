@@ -15,6 +15,7 @@ use App\User;
 use App\Role;
 use App\UserDebitWallet;
 use App\UserPackage;
+use App\UserReferral;
 use App\UserSavingWallet;
 use App\UserSavingWalletTransaction;
 use App\VirtualWallet;
@@ -101,6 +102,10 @@ class UsersController extends Controller
         $coordinator = Coordinator::with('state:id,name')->where('user_id', $user->id)->first();
         $leader = Leader::with('state:id,name')->where('user_id', $user->id)->first();
 
+        $referrals = UserReferral::where('referral_user_id', $user->id)
+            ->get();
+
+
         $saving_wallet = UserSavingWallet::query()
             ->where('user_id', $user->id)
             ->first();
@@ -140,7 +145,7 @@ class UsersController extends Controller
         return view('users.view', compact('user',
             'userPackages', 'saving_wallet', 'virtual_wallet', 'debit_wallet',
         'getDonations', 'provideDonations', 'savingWalletTransactions', 'virtualWalletTransactions',
-        'director', 'coordinator', 'leader'));
+        'director', 'coordinator', 'leader', 'referrals'));
     }
 
     /**

@@ -20,11 +20,21 @@ class PaymentDetailsController extends Controller
 
         $userPaymentDetails = UserPaymentDetail::where('user_id', auth()->user()->id)
             ->first();
-        if ($userPaymentDetails->update($request->input())) {
-            flash('User payment detail successfully updated!')->success();
+
+        if ($userPaymentDetails->edit_locked) {
+            flash()->info('You can only edit your payment details once. Please contact support for assistance.');
+
         } else {
-            flash('User payment detail successfully updated!')->error();
+            $newData = $request->input();
+            $newData['edit_locked'] = 1;
+
+            if ($userPaymentDetails->update($newData)) {
+                flash('User payment detail successfully updated!')->success();
+            } else {
+                flash('User payment detail successfully updated!')->error();
+            }
         }
+
         return back();
     }
 }

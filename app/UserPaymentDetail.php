@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserPaymentDetail extends Model
 {
-    protected $fillable = ['user_id', 'account_name', 'account_number', 'bank_id', 'btc_address'];
+    protected $fillable = [
+        'user_id',
+        'account_name',
+        'account_number',
+        'bank_id',
+        'btc_address',
+        'edit_locked'
+    ];
+
 
     public function bank()
     {

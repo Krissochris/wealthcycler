@@ -88,14 +88,41 @@
             </div>
             <div class="card-body">
 
-                @if (!isset($user->dividend_wallet))
-                    {!! Form::open(['route' => 'dividend_wallets:store']) !!}
-                    {!! Form::hidden('user_id', $user->id) !!}
-                        <div class="form-group">
-                            {!! Form::submit('create dividend wallet', ['class' => 'btn btn-primary']) !!}
-                        </div>
+                @if ($dividend_wallet)
+                    <table class="table">
+                        <tr>
+                            <td>Dividend Wallet Amount </td>
+                            <td>${{ number_format($dividend_wallet->balance, 2) }}</td>
+                        </tr>
+                    </table>
+
+                    {!! Form::open(['route' => ['dividend_wallets:add_transaction', $dividend_wallet->id], 'method' => 'POST' ]) !!}
+
+                    <div class="form-group">
+                        {!! Form::label('amount', 'Amount') !!}
+                        {!! Form::number('amount', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('type', 'Type') !!}
+                        {!! Form::select('type', ['credit' => 'Credit', 'debit' => 'Debit'], null, ['class' => 'form-control']) !!}
+                    </div>
+
+
+                    <div class="form-group">
+                        {!! Form::submit('Submit',['class'=> 'btn btn-primary']) !!}
+                    </div>
+
                     {!! Form::close() !!}
+                @else
+                    <div class="alert alert-danger">
+                        <p>
+                            User have not dividend wallet.
+                        </p>
+                    </div>
+
                 @endif
+
             </div>
 
         </div>

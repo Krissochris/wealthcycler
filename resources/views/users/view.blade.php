@@ -36,9 +36,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="stat-widget-one">
-                        {{--
-                                            <div class="stat-icon dib"><i class="ti-money text-danger" style=""> <span>&#36;</span> </i></div>
-                        --}}
                         <div class="stat-content dib">
                             <div class="stat-text text-danger">Debit Wallet</div>
                             <div class="stat-digit"> <span>&#36;</span> {{ number_format($debit_wallet->amount, 2) }} </div>
@@ -122,6 +119,41 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg- col-sm-12">
+        <div class="card">
+            <div class="card-header">View Referrals</div>
+
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Is pro-member</th>
+                        <th>Date registered</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @if ($referrals->isNotEmpty())
+                            @foreach($referrals as $referral)
+                                <tr>
+                                    <td> {{ $referral->referred_user->name }} </td>
+                                    <td> {{ ($referral->referred_user->is_pro_member) ? 'Yes' : 'No' }} </td>
+                                    <td> {{ $referral->referred_user->created_at }} </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr class="text-center">
+                                <td colspan="3"> No Referrals Yet!</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="row">
         <div class="col-md-6 col-sm-12">

@@ -104,12 +104,34 @@ class DividendWallet extends Model
         return false;
     }
 
+
     public function debit($amount)
     {
-        $this->amount -= $amount;
+        if (!is_numeric($amount)) {
+            return false;
+        }
+        if ($this->notActivated() || $this->isSuspended()) {
+            return false;
+        }
 
-        return $this->update();
+        $this->balance -= (float)$amount;
+        try {
+            DB::beginTransaction();
+
+            $this->update();
+            $this->transactions()->create([
+                'amount' => $amount,
+                'description' => 'Wallet was debited with '. number_format($amount)
+            ]);
+            DB::commit();
+            return true;
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return false;
+        }
     }
+
 
     protected function isSuspended()
     {

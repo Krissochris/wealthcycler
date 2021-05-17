@@ -314,6 +314,8 @@ Route::middleware(['auth'/*,'role:admin'*/])->group(function() {
         ->name('dividend_wallets:update');
     Route::post('/dividend-wallets/create', 'DividendWalletsController@store')
         ->name('dividend_wallets:store');
+    Route::post('/dividend-wallets/add-transaction/{dividendWallet}', 'DividendWalletsController@addTransaction')
+        ->name('dividend_wallets:add_transaction');
 
     // dividend wallet transactions
     Route::get('/dividend-wallet-transactions/index', 'DividendWalletTransactionsController@index')

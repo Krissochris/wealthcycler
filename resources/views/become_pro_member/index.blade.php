@@ -10,15 +10,15 @@
                     <div class="card-body">
                         <p>
                             <strong>
-                                To become a pro member, you would have to pay a one-time fee of $100.
+                                To become a pro member, you would have to pay a one-time fee of ${{ $amount }}.
                             </strong>
                         </p>
                         <p>
-                            The $100 you are paying is for TYEN CLUB lifetime Membership.
+                            The ${{ $amount }} you are paying is for TYEN CLUB lifetime Membership.
                         </p>
                         <p>
                             If you are an investor only, please do not request for TYEN CLUB Membership card,
-                            and your $100 will be eligible for refund as stated in our REFUND Policy.
+                            and your ${{ $amount }} will be eligible for refund as stated in our REFUND Policy.
                         </p>
                         <p>
                             We pay every member/investor of TYEN CLUB $500 annual dividends for a lifetime

@@ -23,15 +23,18 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">User</th>
+                        <th scope="col">Is pro member</th>
                         <th scope="col">Registered On</th>
                     </tr>
                     </thead>
+
                     <tbody>
                     <?php $num = 1; ?>
                     @foreach($referrals as $referral)
                         <tr>
                             <th scope="row">{{ $num }} </th>
                             <td> {{ @$referral->referred_user->name }}</td>
+                            <td> {{ ($referral->referred_user->is_pro_member) ? 'Yes' : 'No' }}</td>
                             <td> {{ $referral->created_at }}</td>
                         </tr>
                         <?php $num++; ?>

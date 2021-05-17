@@ -12,11 +12,18 @@ use App\CoinPaymentTransaction as Transaction;
 
 class BecomeProMemberController extends Controller
 {
-    CONST REGISTRATION_AMOUNT = 100;
+
+    protected $registration_amount;
+
+    public function __construct()
+    {
+        $this->registration_amount = setting('membership_price');
+    }
+
 
     public function index()
     {
-        $pro_member_registration_fee = static::REGISTRATION_AMOUNT;
+        $pro_member_registration_fee = setting('membership_price');
         return view('become_pro_member.index')->with(['amount' => $pro_member_registration_fee]);
 
     }
@@ -25,7 +32,7 @@ class BecomeProMemberController extends Controller
     {
         $postData = $request->all();
         $request->session()->put('payment', [
-            'amount' => static::REGISTRATION_AMOUNT,
+            'amount' => $this->registration_amount,
             'user_id' => auth()->user()->id,
             'item_no' => UserDepositProcessor::PRO_MEMBER_DEPOSIT,
             'item_name' => 'Pro user Package Purchase',

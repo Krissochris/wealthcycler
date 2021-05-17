@@ -53,7 +53,7 @@
                                         </div>
                                         <div id="collapseOne5" class="acod-body collapse in">
                                             <div class="acod-content p-tb15">
-                                                {{ $faq->answer }}
+                                                {!! $faq->answer !!}
                                             </div>
                                         </div>
                                     </div>

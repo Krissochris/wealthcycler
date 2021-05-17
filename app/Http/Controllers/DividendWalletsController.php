@@ -166,4 +166,33 @@ class DividendWalletsController extends Controller
 
         return back();
     }
+
+
+    public function addTransaction(Request $request, DividendWallet $dividendWallet)
+    {
+        $this->validate($request,[
+            'type' => 'required',
+            'amount' => 'required|numeric'
+        ]);
+
+        if ($request->input('type') === 'credit') {
+            $response = $dividendWallet->credit($request->input('amount'));
+            if ($response) {
+                flash()->success('Dividend wallet was successfully credited.');
+            } else {
+                flash()->error('Dividend wallet could not be credited. Please try again.');
+            }
+
+        } elseif ($request->input('type') === 'debit') {
+            $response = $dividendWallet->debit($request->input('amount'));
+            if ($response) {
+                flash()->success('Dividend wallet was successfully debited');
+            } else {
+                flash()->error('Dividend wallet could not be debited. Please try again.');
+            }
+        }
+
+        return back();
+    }
+
 }
