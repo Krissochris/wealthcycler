@@ -105,6 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
+
     public function is_pro_member()
     {
         return ($this->is_pro_member) ? true : false;

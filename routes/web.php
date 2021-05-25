@@ -141,6 +141,8 @@ Route::middleware(['auth'/*,'role:admin'*/])->group(function() {
     Route::post('/users/create', 'UsersController@store')->name('users:store');
     Route::get('/users/edit/{user}', 'UsersController@edit')->name('users:edit');
     Route::put('/users/edit/{user}', 'UsersController@update')->name('users:update');
+    Route::post('/users/payment-detail/{userPaymentDetail}', 'UsersController@updatePaymentDetail')->name('users:update_payment_detail');
+
     Route::get('/users/view/{user}', 'UsersController@show')->name('users:view');
     Route::delete('/users/delete/{user}', 'UsersController@destroy')->name('users:delete');
 

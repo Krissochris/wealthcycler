@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bank;
 use App\Coordinator;
 use App\Country;
 use App\Director;
@@ -15,6 +16,7 @@ use App\User;
 use App\Role;
 use App\UserDebitWallet;
 use App\UserPackage;
+use App\UserPaymentDetail;
 use App\UserReferral;
 use App\UserSavingWallet;
 use App\UserSavingWalletTransaction;
@@ -163,6 +165,7 @@ class UsersController extends Controller
         $userStatus = User::status;
         $roles = Role::pluck('name', 'id');
         $packages = Package::pluck('name', 'id')->prepend('--Select Current Package-- ', '');
+        $banks = Bank::pluck('name', 'id');
 
         $permissions = config('permissions');
 
@@ -171,7 +174,7 @@ class UsersController extends Controller
         $userRoles = $user->roles()->pluck('id');
         return view('users.edit')->with(compact('states',
             'countries', 'user', 'userStatus', 'roles', 'userRoles',
-            'packages', 'permissions', 'rolePermissions'));
+            'packages', 'permissions', 'rolePermissions', 'banks'));
     }
 
     /**
@@ -223,6 +226,16 @@ class UsersController extends Controller
             flash()->success('User was successfully updated!');
         } else {
             flash()->success('User could not be updated. Please try again later.');
+        }
+        return back();
+    }
+
+    public function updatePaymentDetail(Request $request, UserPaymentDetail $userPaymentDetail)
+    {
+        if ($userPaymentDetail->update($request->input())) {
+            flash()->success('Updated payment record!.');
+        } else {
+            flash()->error('Could not update payment record!.');
         }
         return back();
     }

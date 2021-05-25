@@ -62,7 +62,7 @@
                 @if ($userPaymentDetails->edit_locked)
                     <div class="alert alert-info">
                         <p>
-                            Your payment details can not be edit. You can contact support for any assistance.
+                            Your payment details can not be edited. You can contact support for any assistance.
                         </p>
                     </div>
                     <table class="table table-bordered">

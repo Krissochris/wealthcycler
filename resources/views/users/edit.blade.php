@@ -112,6 +112,42 @@
         </div>
 
         <div class="card">
+            <div class="card-header">
+                Payment Details
+            </div>
+            <div class="card-body">
+
+                {!! Form::model($user->payment_detail, ['route' => ['users:update_payment_detail',$user->payment_detail->id ],]) !!}
+                <div class="form-group">
+                    {!! Form::label('Account Name') !!}
+                    {!! Form::text('account_name',null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('account_number', 'Account Number') !!}
+                    {!! Form::text('account_number', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('bank_id', 'Bank') !!}
+                    {!! Form::select('bank_id', $banks, null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('btc_address', 'BTC Address') !!}
+                    {!! Form::text('btc_address', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::button('submit', ['class' => 'btn btn-primary', 'type' => 'submit']) !!}
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+
+
+
+        <div class="card">
             <div class="card-header">User Permissions </div>
             <div class="card-body">
                 {!! Form::open(['route' => ['users:update_permissions', $user->id] ]) !!}
